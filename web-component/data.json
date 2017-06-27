@@ -1,0 +1,7 @@
+{
+  "messages": [
+    {"id": 0, "text": "json-server data.json -p 5555 --watch && lite-server"},
+    {"id": 1, "text": "Hello world"},
+    {"id": 2, "text": "hola mundo"}
+  ]
+}

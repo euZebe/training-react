@@ -1,0 +1,1 @@
+const Useless = props => (<div>:)</div>)

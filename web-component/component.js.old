@@ -1,0 +1,51 @@
+'use strict';
+
+class SimpleList extends HTMLElement {
+    constructor() {
+        super();
+        this.increment = this.increment.bind(this);
+    }
+
+    // life cycle hooks
+    createdCallback() {
+        console.log('createdCallback')
+
+        this.state = {
+            title: 'Bidule',
+            count: 0,
+        };
+    }
+
+    attachedCallback() {
+        console.log('attachedCallback')
+        this.render()
+    }
+
+    detachedCallback() {
+        console.log('detachedCallback')
+    }
+
+    attributeChanged() {
+        console.log('attributeChanged')
+    }
+
+    increment() {
+        this.state.count += 1
+        this.render()
+    }
+
+    render() {
+        this.innerHTML = `
+            <div>
+                <h3>${this.state.title}</h3>
+                <button>+</button>${this.state.count}
+            </div>
+        `
+
+        this.querySelector('button').onclick = () => {
+            this.increment();
+        }
+    }
+}
+
+document.registerElement('simple-list', SimpleList);
