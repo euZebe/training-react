@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+const config = {
+    name: "Translator",
+    version: "0.0.5"
+}
+
+ReactDOM.render(<App {...config} />, document.getElementById('root'));

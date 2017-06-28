@@ -16,6 +16,8 @@
 
 - Object.freeze: empêche l'objet d'être modifié, dans sa structure ou dans ses valeurs => immutabilité (à vérifier pour un sous-objet)
 
+- debounce pour retarder l'appel à une API tant que l'utilisateur est en train de taper (et/ou tant qu'il n'a pas 
+sélectionné au moins x caractères)
 
 - déstructuration de tableau:
 ```
