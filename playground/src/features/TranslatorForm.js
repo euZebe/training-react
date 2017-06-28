@@ -34,25 +34,47 @@ function debounce(func, wait, immediate, context) {
     };
 }
 
+
+const ResultItem = props => (
+    <div>
+        <h4 className="list-group-item-heading">
+            <img src="http://www.geonames.org/flags/x/us.gif" width="25" height="25" /> {props.translated}
+        </h4>
+        <p className="list-group-item-text">
+            <img src="http://www.geonames.org/flags/x/fr.gif" width="25" height="25" /> {props.source}
+        </p>
+    </div>
+)
+
+
+const TranslatorResult = (props) => (
+<div className="alert alert-success">
+    <strong>Result</strong>
+    <Button css="close">&times;</Button>
+    <ResultItem source={props.source} translated={props.translated} />
+    <Button css="btn-success">Add to list</Button>
+</div>
+)
+
 export class TranslatorForm extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { from: 'fr', to: 'us', origin: '', translated: '' };
+        this.state = { from: 'fr', to: 'us', text: '', translated: '' };
     }
 
     handleChangeSelector = (value, selectorType) => {
         this.setState({ [selectorType]: value });
     };
 
-    translate = (event) => {
-        switch (event.target.id) {
-            case 'translatorInput':
-                this.setState({origin: event.target.value});
-                break;
-            default:
-                console.log('target ID not managed:', event.target.id);
-        }
+    setInput = (text) => {
+        this.setState({ text });
+    }
+
+    translateAndUpdate = () => {
+        this.props.handleSubmitForm(this.state)
+            .then(translated => this.setState({ translated }));
+
     }
 
     render() {
@@ -62,7 +84,7 @@ export class TranslatorForm extends React.Component {
                 <h3 className="panel-title">Edit Your Translation</h3>
                 <hr />
                 <form>
-                    <Input label="Text to translate" handleInputChange={this.translate} />
+                    <Input label="Text to translate" handleInputChange={this.setInput} />
                     <div className="form-group">
                         <label htmlFor="">Choose Language</label>
                         <div className="well">
@@ -82,8 +104,9 @@ export class TranslatorForm extends React.Component {
                         </div>
                     </div>
 
-                    <Button id="submitTranslation" css="btn-primary" handleClick={this.props.handleSubmitForm}>Submit</Button>
+                    <Button id="submitTranslation" css="btn-primary" handleClick={this.translateAndUpdate} >Submit</Button>
 
+                    <TranslatorResult source={this.state.text} translated={this.state.translated} />
                 </form>
             </div>
         )

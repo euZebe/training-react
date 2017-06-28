@@ -21,7 +21,7 @@ const HistoryItem = (props) => (
             <img src={`http://www.geonames.org/flags/x/${props.to}.gif`} width="25" height="25" /> {props.translated}
         </h4>
         <p className="list-group-item-text">
-            <img src={`http://www.geonames.org/flags/x/${props.from}.gif`} width="25" height="25" /> {props.origin}
+            <img src={`http://www.geonames.org/flags/x/${props.from}.gif`} width="25" height="25" /> {props.text}
         </p>
     </a>
 )
@@ -39,7 +39,7 @@ export class TranslatorHistory extends Component {
     }
 
     getFilteredList =(value) => {
-        return this.props.historyItems.filter(item => item.origin.includes(value) || item.translated.includes(value))
+        return this.props.historyItems.filter(item => item.text.includes(value) || item.translated.includes(value))
     }
 
     filter = (value) => {

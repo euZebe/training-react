@@ -24,3 +24,32 @@ sélectionné au moins x caractères)
 const table = [1, 2, 3];
 [,a,] = x; // a = 2
 ```
+
+- kangax compatibility tables: to know new features of javascript per version
+- devdocs.io : moteur de recherche de documentation multi-technos
+    - possibilité de le mettre en offline
+    
+    
+# Code hoisting
+    - lecture du code en 2 passes:
+        - lecture des var et functions et rattachement au scope global
+        - exécution des instructions
+```
+foo();
+var begin = 'hello';
+function foo() {
+    console.log(begin, end);
+    var end = 'world';
+}
+
+// is converted to 
+
+var begin; // ligne déclarative de variable: remontée
+function foo() { // ligne déclarative de function: remontée en haut de script
+    var end;
+    console.log(begin, end);
+    end = 'world';
+}
+foo();
+begin = 'hello';
+```
